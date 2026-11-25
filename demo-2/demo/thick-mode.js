@@ -1,5 +1,5 @@
 // DEMO INSTRUKTUR: Thick mode memakai Oracle Instant Client.
-// Peserta tidak perlu menjalankan ini: lab memakai Thin mode (tanpa Instant Client).
+// Opsional: lab memakai Thin mode (tanpa Instant Client).
 // Pakai: ORACLE_CLIENT_LIB_DIR=/path/instantclient node --env-file=.env demo/thick-mode.js
 // Linux: jangan isi libDir, atur lewat ldconfig / LD_LIBRARY_PATH.
 import oracledb from 'oracledb';

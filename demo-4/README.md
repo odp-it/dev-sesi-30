@@ -1,15 +1,16 @@
-# Demo 4 · CRUD Dasar (±22 menit)
+# Demo 4 · CRUD Dasar
 
-> Folder ini project lengkap. Hasil Demo 1 sampai Demo 3 **sudah terisi** (catch-up). Kalau pekerjaanmu sendiri sudah jalan, boleh pakai punyamu.
-> Buka folder ini langsung di VS Code, lalu lakukan persiapan di [README utama](../README.md) (mis. salin `.env`, install, atau `git init`) **di folder ini**. Semua path relatif terhadap folder ini.
+[Persiapan](../README.md) · [Troubleshooting](../TROUBLESHOOTING.md)
 
-Peraga 7 menit, ikuti 15 menit.
+> Hasil Demo 1 sampai Demo 3 sudah terisi di folder ini. Buka folder ini langsung di VS Code dan lakukan persiapan project di sini (`.env`, install, atau `git init`).
+
+Lengkapi skrip CRUD dasar.
 
 Sampai Demo 3 aplikasi hanya membaca data. Demo 4 mengubah data lewat satu skrip: tambah satu nasabah uji, ubah telepon dan emailnya, lalu hapus. Skrip meminjam satu koneksi dari pool dengan `getConnection()` (sudah ada di `src/db/oracle.js`) dan mengembalikannya di blok `finally`. Nilai tetap lewat bind variable. `autoCommit` di node-oracledb bawaannya `false`: perubahan baru permanen setelah `await conn.commit()`, dan transaksi yang belum di-commit dibatalkan saat koneksi dilepas. REST endpoint untuk CRUD dan transaksi beberapa statement (transfer) dibahas di sesi 31.
 
 Skrip ini menyisakan data seperti semula: nasabah uji (`CIF-SIM-9001`) dihapus di akhir.
 
-## 4.1 INSERT dengan RETURNING (±6 menit)
+## 4.1 INSERT dengan RETURNING
 
 Di `scripts/crud-dasar.js`, ganti TODO 4.1:
 
@@ -36,7 +37,7 @@ console.log(`INSERT  rowsAffected=${insert.rowsAffected}  customer_id=${id}`);
 
 `RETURNING customer_id INTO :id` mengembalikan id baru tanpa `SELECT` lagi. Hasilnya array, jadi diambil dengan `outBinds.id[0]`.
 
-## 4.2 UPDATE phone dan email (±4 menit)
+## 4.2 UPDATE phone dan email
 
 Ganti TODO 4.2:
 
@@ -55,7 +56,7 @@ const { rows } = await conn.execute(
 console.table(rows);
 ```
 
-## 4.3 DELETE nasabah uji (±3 menit)
+## 4.3 DELETE nasabah uji
 
 Ganti TODO 4.3:
 
@@ -70,7 +71,7 @@ console.log(`DELETE  rowsAffected=${lagi.rowsAffected}  (sudah tidak ada)`);
 
 DELETE kedua sengaja dijalankan: `rowsAffected` `0` berarti tidak ada baris yang cocok.
 
-## 4.4 Jalankan (±2 menit)
+## 4.4 Jalankan
 
 ```bash
 npm run crud

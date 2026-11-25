@@ -1,13 +1,14 @@
-# Demo 3 · Query Berparameter (±40 menit)
+# Demo 3 · Query Berparameter
 
-> Folder ini project lengkap. Hasil Demo 1 sampai Demo 2 **sudah terisi** (catch-up). Kalau pekerjaanmu sendiri sudah jalan, boleh pakai punyamu.
-> Buka folder ini langsung di VS Code, lalu lakukan persiapan di [README utama](../README.md) (mis. salin `.env`, install, atau `git init`) **di folder ini**. Semua path relatif terhadap folder ini.
+[Persiapan](../README.md) · [Troubleshooting](../TROUBLESHOOTING.md)
 
-Peraga 12 menit, ikuti 28 menit.
+> Hasil Demo 1 sampai Demo 2 sudah terisi di folder ini. Buka folder ini langsung di VS Code dan lakukan persiapan project di sini (`.env`, install, atau `git init`).
+
+Buat endpoint baca data nasabah dengan query berparameter.
 
 Semua nilai dari pemakai masuk lewat bind variable (`:segment`, `:q`, `:id`), tidak pernah disambung ke teks SQL.
 
-## 3.1 Daftar nasabah dengan filter (±12 menit)
+## 3.1 Daftar nasabah dengan filter
 
 Di `src/routes/customers.js`, ganti TODO 3.1:
 
@@ -36,7 +37,7 @@ curl "http://localhost:3000/api/customers?segment=UMKM&q=contoh"
 
 Yang harus terlihat: `"total":6`, semua `"segment":"UMKM"`, nama berakhiran `Contoh`.
 
-## 3.2 Detail nasabah (±8 menit)
+## 3.2 Detail nasabah
 
 Ganti TODO 3.2:
 
@@ -71,7 +72,7 @@ curl -i http://localhost:3000/api/customers/abc
 | `/customers/999` | `404 Not Found` | `{"error":{"code":"NOT_FOUND","message":"Nasabah 999 tidak ditemukan"}}` |
 | `/customers/abc` | `400 Bad Request` | `{"error":{"code":"VALIDATION_ERROR","message":"id harus bilangan bulat positif"}}` |
 
-## 3.3 Rekening milik nasabah (±4 menit)
+## 3.3 Rekening milik nasabah
 
 Ganti TODO 3.3 dengan query `SELECT account_id, account_no, product, balance, status FROM accounts WHERE customer_id = :id ORDER BY account_id`, petakan dengan `toAccount`, kirim `{ data: [...] }`.
 
@@ -81,7 +82,7 @@ curl http://localhost:3000/api/customers/1/accounts
 
 Yang harus terlihat: dua rekening, `SIM-1000001` (TABUNGAN) dan `SIM-1000002` (GIRO). Saldo tampil sebagai string, mis. `"balance":"14550000"`, karena `fetchAsString`. Format dua desimal dibuat di sesi 31.
 
-## 3.4 Bandingkan dengan string disambung (±4 menit)
+## 3.4 Bandingkan dengan string disambung
 
 ```bash
 node --env-file=.env demo/sql-injection.js "' OR '1'='1"

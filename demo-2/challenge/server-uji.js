@@ -1,4 +1,4 @@
-// Menjalankan aplikasi di port acak untuk test dan cek otomatis. File ini sudah lengkap: tidak perlu diubah.
+// Menjalankan aplikasi di port acak untuk test dan cek otomatis. File ini sudah lengkap, biarkan apa adanya.
 import { once } from 'node:events';
 import { app } from '../src/app.js';
 import { closePool, initPool } from '../src/db/oracle.js';

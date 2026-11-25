@@ -1,11 +1,12 @@
-# Demo 2 · Connection Pool dan Endpoint `/health` (±58 menit)
+# Demo 2 · Connection Pool dan Endpoint `/health`
 
-> Folder ini project lengkap. Hasil Demo 1 **sudah terisi** (catch-up). Kalau pekerjaanmu sendiri sudah jalan, boleh pakai punyamu.
-> Buka folder ini langsung di VS Code, lalu lakukan persiapan di [README utama](../README.md) (mis. salin `.env`, install, atau `git init`) **di folder ini**. Semua path relatif terhadap folder ini.
+[Persiapan](../README.md) · [Troubleshooting](../TROUBLESHOOTING.md)
 
-Tahap 1: peraga 12 menit (pool), ikuti 28 menit (2.1–2.4). Tahap 2: peraga 6 menit (health check dan pesan error), ikuti 12 menit (2.5–2.6).
+> Hasil Demo 1 sudah terisi di folder ini. Buka folder ini langsung di VS Code dan lakukan persiapan project di sini (`.env`, install, atau `git init`).
 
-## 2.1 Modul pool (±13 menit)
+Kerjakan 2.1–2.6: connection pool, lalu endpoint `/health`.
+
+## 2.1 Modul pool
 
 Lengkapi `src/db/oracle.js` (TODO 2.1-1 sampai 2.1-5):
 
@@ -52,7 +53,7 @@ export async function query(sql, binds = {}, options = {}) {
 
 `conn.close()` pada koneksi dari pool tidak memutus koneksi ke database: koneksi dikembalikan ke pool untuk request berikutnya. Karena ada di `finally`, koneksi tetap kembali walaupun query error.
 
-## 2.2 Buka dan tutup pool di `server.js` (±5 menit)
+## 2.2 Buka dan tutup pool di `server.js`
 
 ```js
 await initPool();
@@ -81,7 +82,7 @@ process.on('SIGTERM', shutdown);
 
 Express 5 memanggil callback `app.listen` juga ketika gagal listen, dengan error sebagai argumen. Tanpa cek `err`, aplikasi mencetak `API jalan` padahal port sudah dipakai proses lain, dan pool tetap terbuka.
 
-## 2.3 Jalankan (±5 menit)
+## 2.3 Jalankan
 
 ```bash
 npm run dev
@@ -101,7 +102,7 @@ SIGINT diterima, menutup server dan pool...
 Pool ditutup
 ```
 
-## 2.4 Test konfigurasi salah (±5 menit)
+## 2.4 Test konfigurasi salah
 
 Ubah sementara `DB_PASSWORD` di `.env` menjadi `salah`, lalu `npm run dev`. Aplikasi berhenti saat start:
 
@@ -113,7 +114,7 @@ Kembalikan password yang benar. Tanpa langkah "pinjam satu koneksi" di 2.1, apli
 
 Langkah 2.5 dan 2.6 dikerjakan setelah materi health check (`/health` memakai pool dari 2.1–2.3).
 
-## 2.5 Tulis endpoint (±8 menit)
+## 2.5 Tulis endpoint
 
 Di `src/app.js`, ganti TODO 2.5:
 
@@ -128,7 +129,7 @@ app.get('/health', async (req, res) => {
 });
 ```
 
-## 2.6 Test (±4 menit)
+## 2.6 Test
 
 `npm run dev` harus masih jalan (atau jalankan lagi). Buka terminal kedua:
 

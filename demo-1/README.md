@@ -1,11 +1,12 @@
-# Demo 1 · Setup Project & Koneksi Pertama (±40 menit)
+# Demo 1 · Setup Project & Koneksi Pertama
 
-> Folder ini project lengkap. Isinya starter: belum ada Demo yang diisi.
-> Buka folder ini langsung di VS Code, lalu lakukan persiapan di [README utama](../README.md) (mis. salin `.env`, install, atau `git init`) **di folder ini**. Semua path relatif terhadap folder ini.
+[Persiapan](../README.md) · [Troubleshooting](../TROUBLESHOOTING.md)
 
-Peraga 20 menit: driver, Thin dan Thick, connect string, `.env`, koneksi pertama. Ikuti 20 menit: langkah 1.1–1.4.
+> Buka folder ini langsung di VS Code dan lakukan persiapan project di sini (`.env`, install, atau `git init`).
 
-## 1.1 Install dependency (±3 menit)
+Kerjakan 1.1–1.4: siapkan project dan buat koneksi pertama ke Oracle.
+
+## 1.1 Install dependency
 
 Buka folder `demo-1` di VS Code. Kalau muncul dialog `Do you trust the authors of the files in this folder?` (Restricted Mode), pilih **Trust Folder & Continue**. Buka terminal (**Terminal → New Terminal**):
 
@@ -15,7 +16,7 @@ npm ci
 
 Yang harus terlihat: `added ... packages` tanpa error. Peringatan `npm warn install-scripts ... oracledb@26.0.0` boleh diabaikan: skrip itu hanya mengecek binary Thick mode, Thin mode tetap jalan. Di Windows PowerShell 5.1 peringatan ini tampil merah seperti error karena ditulis ke stderr; tetap aman.
 
-## 1.2 Buat `.env` (±4 menit)
+## 1.2 Buat `.env`
 
 ```bash
 cp .env.example .env
@@ -38,7 +39,7 @@ PORT=3000
 
 `.env` sudah ada di `.gitignore`: password tidak ikut ter-commit.
 
-## 1.3 Siapkan data simulasi (±3 menit)
+## 1.3 Siapkan data simulasi
 
 Perintah ini menghapus lalu membuat ulang tabel `BRANCHES`, `CUSTOMERS`, `ACCOUNTS`, `TRANSACTIONS` di `ALP_DEV` dengan data standar (data latihan sesi 22–23 di tabel itu ikut terhapus):
 
@@ -61,7 +62,7 @@ db/02-seed.sql: 157 statement
 
 `npm run db:reset` menjalankan `node --env-file=.env scripts/db-reset.js`: variabel di `.env` masuk ke `process.env` tanpa paket tambahan.
 
-## 1.4 Koneksi pertama (±10 menit)
+## 1.4 Koneksi pertama
 
 Lengkapi `scripts/cek-koneksi.js` (TODO 1.4-1 sampai 1.4-4):
 
