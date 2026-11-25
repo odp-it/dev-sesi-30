@@ -1,0 +1,23 @@
+{
+  "name": "tabungan-umkm-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Koneksi Express 5 ke Oracle dengan node-oracledb (Tabungan UMKM, data simulasi)",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node --env-file=.env src/server.js",
+    "dev": "node --watch --env-file=.env src/server.js",
+    "db:reset": "node --env-file=.env scripts/db-reset.js",
+    "cek": "node --env-file=.env scripts/cek-koneksi.js",
+    "crud": "node --env-file=.env scripts/crud-dasar.js",
+    "cek:lab": "node --env-file=.env challenge/cek-lab.js",
+    "test:alp": "node --env-file=.env --test challenge/alp.test.js"
+  },
+  "dependencies": {
+    "express": "5.3.0",
+    "oracledb": "26.0.0"
+  }
+}
